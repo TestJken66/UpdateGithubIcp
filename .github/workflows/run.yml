@@ -90,8 +90,6 @@ jobs:
           git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
           git push
 
-
-
       - name: ls_and_see_diff
         shell: bash
         continue-on-error: true
