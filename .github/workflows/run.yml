@@ -7,7 +7,7 @@ on:
   schedule:
     #   分 时 日 月 周
     - cron: "* */15 * * *"
-  # workflow_dispatch:
+  workflow_dispatch:
 #   fork:
 #     branches: [main gh-pages]
 #   label:
