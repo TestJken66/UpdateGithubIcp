@@ -82,13 +82,10 @@ jobs:
               echo "----------------------[编译完成,即将运行]----------------------"
               echo "-------------------------------------------------------------"
               ls target/
+              java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
             fi
           fi
 
-      - name: run java project
-        shell: bash
-        continue-on-error: true
-        run: java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=256m  -XX:MaxMetaspaceSize=256m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
 
       - name: ls_and_see_diff
         shell: bash
