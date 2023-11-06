@@ -6,8 +6,8 @@ on:
     branches: [main gh-pages]
   schedule:
     #   分 时 日 月 周
-    - cron: "* */12 * * *"
-  workflow_dispatch:
+    - cron: "* */15 * * *"
+  # workflow_dispatch:
 #   fork:
 #     branches: [main gh-pages]
 #   label:
@@ -69,36 +69,27 @@ jobs:
         continue-on-error: true
         run: |
           git clone https://oauth2:${{ secrets.GTOKEN }}@github.com/parserpp/githubIcp.git ../githubIcp
-          if [ $# == 0 ]; then
-            echo  "克隆成功......"
-            cd ../githubIcp
-            ls
-            chmod -R 777 *
-            git config core.filemode false
-            echo "准备开始编译～～～～"
-            mvn compile assembly:single  -Dmaven.test.skip=true
-            if [ $# == 0 ]; then
-              echo "-------------------------------------------------------------"
-              echo "----------------------[编译完成,即将运行]----------------------"
-              echo "-------------------------------------------------------------"
-              ls target/
-              java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
-              echo "-------------------------------------------------------------"
-              echo "----------------------[运行完成]----------------------"
-              echo "-------------------------------------------------------------"
-              git config --global user.name "GithubAction"
-              git config --global user.email "sanbo.xyz@gmail.com"
-                if [ -z "$(git status --porcelain)" ]
-                then
-                  echo "============================nothing to update.==============================="
-                else
-                  git add .
-                  git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
-                  git push
-                fi
-              fi
-            fi
-          fi
+          echo  "克隆成功......"
+          cd ../githubIcp
+          ls
+          chmod -R 777 *
+          git config core.filemode false
+          echo "准备开始编译～～～～"
+          mvn compile assembly:single  -Dmaven.test.skip=true
+          echo "-------------------------------------------------------------"
+          echo "----------------------[编译完成,即将运行]----------------------"
+          echo "-------------------------------------------------------------"
+          ls target/
+          java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
+          echo "-------------------------------------------------------------"
+          echo "----------------------[运行完成]----------------------"
+          echo "-------------------------------------------------------------"
+          git config --global user.name "GithubAction"
+          git config --global user.email "sanbo.xyz@gmail.com"
+          git add .
+          git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+          git push
+
 
 
       - name: ls_and_see_diff
