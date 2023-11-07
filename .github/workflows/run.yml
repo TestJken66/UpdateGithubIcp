@@ -86,7 +86,7 @@ jobs:
           ls target/
           tree
 
-      - name: Runs
+      - name: Runs_java
         shell: bash
         continue-on-error: true
         run: |
@@ -100,11 +100,21 @@ jobs:
           echo "[公司] ❌:$(wc -l icp/info/company_failed.txt | awk '{print $1}') ✅:$(wc -l icp/info/company_pos.txt| awk '{print $1}' ) 🆗:$(wc -l icp/info/company_res.txt| awk '{print $1}' )">>info.txt
           echo "[域名]❌:$(wc -l icp/info/domain_failed.txt| awk '{print $1}') ✅:$(wc -l icp/info/domain_pos.txt| awk '{print $1}') 🆗:$(wc -l icp/info/domain_res.txt| awk '{print $1}')">>info.txt
 
+      - name: commit_server
+        shell: bash
+        continue-on-error: true
+        run: |
+          cd ../githubIcp
           git config --global user.name "GithubAction"
           git config --global user.email "sanbo.xyz@gmail.com"
-          git add .
-          git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
-          git push
+          if [ -z "$(git status --porcelain)" ]
+          then
+            echo "============================nothing to update.==============================="
+          else
+            git add .
+            git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+            git push
+          fi
 
       - name: ls_and_see_diff
         shell: bash
