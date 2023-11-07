@@ -78,14 +78,20 @@ jobs:
           ls
           chmod -R 777 *
           git config core.filemode false
-          #echo "准备开始编译～～～～"
-          #mvn compile assembly:single  -Dmaven.test.skip=true
-          #echo "-------------------------------------------------------------"
-          #echo "----------------------[编译完成,即将运行]----------------------"
-          #echo "-------------------------------------------------------------"
-          #ls target/
+          echo "准备开始编译～～～～"
+          mvn compile assembly:single  -Dmaven.test.skip=true
+          echo "-------------------------------------------------------------"
+          echo "----------------------[编译完成,即将运行]----------------------"
+          echo "-------------------------------------------------------------"
+          ls target/
           tree
-          java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./releases/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+      - name: Runs
+        shell: bash
+        continue-on-error: true
+        run: |
+          cd ../githubIcp
+          java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
           echo "-------------------------------------------------------------"
           echo "----------------------[运行完成]----------------------"
           echo "-------------------------------------------------------------"
