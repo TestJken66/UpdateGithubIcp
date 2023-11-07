@@ -90,13 +90,11 @@ jobs:
           echo "----------------------[运行完成]----------------------"
           echo "-------------------------------------------------------------"
           d=$(date "+%Y-%m-%d %H:%M:%S")
-          echo "-----------[$d]-------------">>info.txt
-          echo "公司失败数量: $(wc -l icp/info/company_failed.txt | awk '{print $1}')">>info.txt
-          echo "公司成功数量: $(wc -l icp/info/company_pos.txt| awk '{print $1}' )">>info.txt
-          echo "公司详情数量: $(wc -l icp/info/company_res.txt| awk '{print $1}' )">>info.txt
-          echo "域名失败数量: $(wc -l icp/info/domain_failed.txt| awk '{print $1}')">>info.txt
-          echo "域名成功数量: $(wc -l icp/info/domain_pos.txt| awk '{print $1}')">>info.txt
-          echo "域名详情数量: $(wc -l icp/info/domain_res.txt| awk '{print $1}')">>info.txt
+          echo "---------$d--------">>info.txt
+          echo "[公司] ❌:$(wc -l icp/info/company_failed.txt | awk '{print $1}') ✅:$(wc -l icp/info/company_pos.txt| awk '{print $1}' )">>info.txt
+          echo "[公司] $(wc -l icp/info/company_res.txt| awk '{print $1}' )">>info.txt
+          echo "[域名]❌:$(wc -l icp/info/domain_failed.txt| awk '{print $1}') ✅:$(wc -l icp/info/domain_pos.txt| awk '{print $1}')">>info.txt
+          echo "[域名] $(wc -l icp/info/domain_res.txt| awk '{print $1}')">>info.txt
 
           git config --global user.name "GithubAction"
           git config --global user.email "sanbo.xyz@gmail.com"
