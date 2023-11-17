@@ -1,4 +1,4 @@
-name: schedule
+name: icp_company_schedule
 
 on:
   push:
@@ -9,48 +9,8 @@ on:
     - cron: "* */10 * * *"
   repository_dispatch:
     types:
-      - webhook-1
-      - webhook-2
+      - icp_company
   workflow_dispatch:
-#   fork:
-#     branches: [main gh-pages]
-#   label:
-#     types:
-#       - created
-#   issues:
-#     types:
-#       - opened
-#       - labeled
-#   page_build:
-#     branches: [main gh-pages]
-#   workflow_run:
-#     workflows: ["Build"]
-#     types: [requested]
-#     # branches-ignore:
-#     #   - "canary"
-#   workflow_dispatch:
-#     inputs:
-#       logLevel:
-#         description: "Log level"
-#         required: true
-#         default: "warning"
-#         type: choice
-#         options:
-#           - info
-#           - warning
-#           - debug
-#       print_tags:
-#         description: "True to print to STDOUT"
-#         required: true
-#         type: boolean
-#       tags:
-#         description: "Test scenario tags"
-#         required: true
-#         type: string
-#       environment:
-#         description: "Environment to run tests against"
-#         type: environment
-#         required: true
 
 jobs:
   build:
@@ -91,7 +51,8 @@ jobs:
         continue-on-error: true
         run: |
           cd ../githubIcp
-          java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
+          #java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=512m  -XX:MaxMetaspaceSize=512m  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8 -jar  ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar
+          java -Xms2g  -Xmx2g  -Xmn1g  -XX:MetaspaceSize=1g  -XX:MaxMetaspaceSize=1g  -XX:MaxDirectMemorySize=1g -Dfile.encoding=UTF-8  -cp ./target/githubIcp-1.0-SNAPSHOT-jar-with-dependencies.jar me.github.icps.CompanyMain
           echo "-------------------------------------------------------------"
           echo "----------------------[运行完成]----------------------"
           echo "-------------------------------------------------------------"
