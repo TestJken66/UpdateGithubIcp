@@ -48,3 +48,16 @@ jobs:
         run: |
           cd ../icp
           python main.py
+
+      - name: see the result
+        shell: bash
+        continue-on-error: true
+        run: |
+          cd ../icp
+          git stauts
+          echo "--------------------------查看成功列表结果-----------------------------"
+          cat res/success_companys.txt
+          echo "--------------------------查看失败列表结果-----------------------------"
+          cat res/failed_companys.txt
+          echo "--------------------------查看结果-----------------------------"
+          cat res/companys_res.txt
