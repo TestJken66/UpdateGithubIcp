@@ -46,5 +46,5 @@ jobs:
         shell: bash
         continue-on-error: true
         run: |
-          cd../icp
+          cd ../icp
           python main.py
