@@ -1,13 +1,17 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
-name: Python application
+name: companys
 
 on:
   push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
+  schedule:
+    ## 每10分钟触发一次
+    #   分 时 日 月 周
+    - cron: "*/10 * * * *"
+  repository_dispatch:
+    types:
+      - companys
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -54,7 +58,7 @@ jobs:
         continue-on-error: true
         run: |
           cd ../icp
-          git stauts
+          git status
           echo "--------------------------查看成功列表结果-----------------------------"
           cat res/success_companys.txt
           echo "--------------------------查看失败列表结果-----------------------------"
