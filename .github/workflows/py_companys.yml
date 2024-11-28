@@ -7,14 +7,14 @@ on:
   schedule:
     ## 每10分钟触发一次
     #   分 时 日 月 周
-    - cron: "*/8 * * * *"
+    - cron: "*/5 * * * *"
   repository_dispatch:
     types:
       - companys
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
