@@ -60,11 +60,11 @@ jobs:
           cd ../icp
           git status
           echo "--------------------------查看成功列表结果-----------------------------"
-          cat res/success_companys.txt
+          awk 'END {print NR}' res/success_companys.txt
           echo "--------------------------查看失败列表结果-----------------------------"
-          cat res/failed_companys.txt
+          awk 'END {print NR}' res/failed_companys.txt
           echo "--------------------------查看结果-----------------------------"
-          cat res/companys_res.txt
+          awk 'END {print NR}' res/companys_res.txt
 
       - name: commit_server
         shell: bash
