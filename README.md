@@ -19,7 +19,7 @@ curl -X POST https://api.github.com/repos/TestJken66/UpdateGithubIcp/dispatches 
 curl -X POST https://api.github.com/repos/TestJken66/UpdateGithubIcp/dispatches \
     -H "Accept: application/vnd.github.everest-preview+json" \
     -H "Authorization: token $GTOKEN" \
-    --data '{"event_type": "companys"}'
+    --data '{"event_type": "wowowos"}'
 
 ```
 - https://docs.github.com/zh/actions/using-workflows/events-that-trigger-workflows

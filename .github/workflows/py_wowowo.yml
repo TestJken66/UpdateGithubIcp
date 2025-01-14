@@ -1,4 +1,4 @@
-name: companys
+name: wowowo
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     - cron: "*/20 * * * *"
   repository_dispatch:
     types:
-      - companys
+      - wowowos
   workflow_dispatch:
 
 permissions:
